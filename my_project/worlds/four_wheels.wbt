@@ -1,0 +1,174 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  info [
+    "Description: Examples of four wheels vehicles"
+  ]
+  title "Four Wheels"
+  basicTimeStep 16
+  coordinateSystem "NUE"
+  lineScale 0.2
+}
+Viewpoint {
+  orientation -0.25435410654692275 0.9026783781248304 0.34709614539582906 2.13985
+  position 1.349398329382825 1.7369737037968345 -1.3709282942652417
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 3 3
+}
+DEF OMNI_WHEELS Robot {
+  translation 8.949385543479354e-08 0.07878388639837777 -0.5000012594528952
+  rotation -1.7800729657803793e-08 0.9999999999999997 -1.583979037721947e-08 1.5203054720518203
+  children [
+    DEF BODY_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.3 0.1 0.3
+      }
+    }
+    DEF REAR_RIGHT_WHEEL HingeJoint {
+      jointParameters HingeJointParameters {
+        position 2016.6342614051257
+        axis 0.707107 0 -0.707107
+        anchor 0.15 0 -0.15
+      }
+      device [
+        RotationalMotor {
+          name "rear_right_wheel"
+        }
+      ]
+      endPoint Solid {
+        translation 0.15 0 -0.15
+        rotation 0.7071067811865475 0 -0.7071067811865475 6.014963107658025
+        children [
+          DEF WHEEL_ROT Transform {
+            rotation 0.7071067811865476 0 0.7071067811865476 1.5708
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.8 0.8 0.8
+                  roughness 1
+                  metalness 0
+                }
+                geometry DEF WHEEL_CYL Cylinder {
+                  height 0.04
+                  radius 0.08
+                }
+              }
+            ]
+          }
+        ]
+        name "rear right wheel"
+        boundingObject USE WHEEL_ROT
+        physics Physics {
+        }
+        linearVelocity 0.10809469710333881 -4.665441268288735e-09 -0.09879098837631332
+        angularVelocity -1.349429476847746 -0.6918497464173959 -1.4761925373117804
+      }
+    }
+    DEF REAR_LEFT_WHEEL HingeJoint {
+      jointParameters HingeJointParameters {
+        position 2016.6342614105547
+        axis 0.707107 0 0.707107
+        anchor 0.15 0 0.15
+      }
+      device [
+        RotationalMotor {
+          name "rear_left_wheel"
+        }
+      ]
+      endPoint Solid {
+        translation 0.15 0 0.15
+        rotation 0.7071067811865476 0 0.7071067811865476 6.014963113087028
+        children [
+          DEF WHEEL_ROT2 Transform {
+            rotation -0.7071067811865476 0 0.7071067811865476 1.5708
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.8 0.8 0.8
+                  roughness 1
+                  metalness 0
+                }
+                geometry DEF WHEEL_CYL Cylinder {
+                  height 0.04
+                  radius 0.08
+                }
+              }
+            ]
+          }
+        ]
+        name "rear left wheel"
+        boundingObject USE WHEEL_ROT2
+        physics Physics {
+        }
+        linearVelocity 0.09879057880723514 -3.467488316033425e-09 0.10809465970308932
+        angularVelocity 1.4761925112351648 -0.6918497390511857 -1.3494294453044953
+      }
+    }
+    DEF FRONT_RIGHT_WHEEL HingeJoint {
+      jointParameters HingeJointParameters {
+        position 2016.6342614096038
+        axis -0.707107 0 -0.707107
+        anchor -0.15 0 -0.15
+      }
+      device [
+        RotationalMotor {
+          name "front_right_wheel"
+        }
+      ]
+      endPoint Solid {
+        translation -0.15 0 -0.15
+        rotation -0.7071067811865475 0 -0.7071067811865475 6.014963112136151
+        children [
+          USE WHEEL_ROT2
+        ]
+        name "front right wheel"
+        boundingObject USE WHEEL_ROT2
+        physics Physics {
+        }
+        linearVelocity -0.09879094583734867 3.3365062537276275e-09 -0.10809510666879078
+        angularVelocity -1.4761925689533872 -0.6918496545405558 1.3494294536633697
+      }
+    }
+    DEF FRONT_LEFT_WHEEL HingeJoint {
+      jointParameters HingeJointParameters {
+        position 2016.6342614021369
+        axis -0.707107 0 0.707107
+        anchor -0.15 0 0.15
+      }
+      device [
+        RotationalMotor {
+          name "front_left_wheel"
+        }
+      ]
+      endPoint Solid {
+        translation -0.15 0 0.15
+        rotation -0.7071067811865476 0 0.7071067811865476 6.014963104669199
+        children [
+          USE WHEEL_ROT
+        ]
+        name "front left wheel"
+        boundingObject USE WHEEL_ROT
+        physics Physics {
+        }
+        linearVelocity -0.10809506926854062 4.534458817248812e-09 0.09879053626826965
+        angularVelocity 1.3494294221201135 -0.6918496471743443 1.4761925428767702
+      }
+    }
+  ]
+  name "omni_wheels"
+  boundingObject USE BODY_SHAPE
+  physics Physics {
+  }
+  controller "my_controller1"
+  linearVelocity -1.8479943148117272e-07 -6.549104606770683e-11 -2.2476934606678315e-07
+  angularVelocity -2.7354491598694238e-08 -0.690126461653133 2.790948166273111e-09
+}
