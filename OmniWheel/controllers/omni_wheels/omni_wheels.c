@@ -20,20 +20,25 @@
 // motor wheels
 static WbDeviceTag wheels[4];
 
-static void wheel_set_speed(WbDeviceTag tag, double speed) {
+static void rotate(WbDeviceTag tag, double speed) {
   if (speed >= 0.0) {
     wb_motor_set_position(tag, INFINITY);
     wb_motor_set_velocity(tag, speed);
   } else {
-    wb_motor_set_position(tag, -INFINITY);
-    wb_motor_set_velocity(tag, -speed);
+    wb_motor_set_position(tag, INFINITY);
+    wb_motor_set_velocity(tag, speed);
   }
 }
+
+static void go_straight(WbDeviceTag tag, double speed) {
+  wb_motor_set_position(tag, INFINITY);
+  wb_motor_set_velocity(tag, speed);
+  }
 
 static void wheels_set_speed(double speed) {
   int i;
   for (i = 0; i < 4; i++)
-    wheel_set_speed(wheels[i], speed);
+    rotate(wheels[i], speed);
 }
 
 int main(int argc, char **argv) {
@@ -47,7 +52,7 @@ int main(int argc, char **argv) {
   wheels[3] = wb_robot_get_device("wheel4");
 
   // go forward
-  wheels_set_speed(2.0);
+  wheels_set_speed(-2.0);
   
   // forever
   double time = 0.0;
